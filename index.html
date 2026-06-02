@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escape Restaurant — Koh Samui</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sand: #F5EDD8;
+    --cream: #FAF6EE;
+    --teal: #2A6B6C;
+    --teal-light: #3D8B8C;
+    --gold: #C8A96E;
+    --gold-light: #E2C98A;
+    --dark: #1C2826;
+    --text: #3A3A3A;
+    --text-light: #6B6B6B;
+    --white: #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text);
+    background: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.4s, padding 0.4s, box-shadow 0.4s;
+    background: transparent;
+  }
+
+  nav.solid {
+    background: rgba(28, 40, 38, 0.97);
+    padding: 0.8rem 2rem;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+  }
+
+  .nav-logo span {
+    color: var(--gold-light);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold-light); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--dark) !important;
+    padding: 0.5rem 1.2rem;
+    font-weight: 700 !important;
+    transition: background 0.3s !important;
+  }
+
+  .nav-cta:hover { background: var(--gold-light) !important; color: var(--dark) !important; }
+
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: white;
+    transition: 0.3s;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--dark);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photo_reference=Ab43m-sfGwokM3s3PBK1Nc60cOL0Euc5bGvCqnVOuZGTj1oLFnqtNCTXNCY5m08Rv509DEXDHTpmljRKRlkVc32csukpX6nTBmDjbBPu_NpQ9tFzsaIMAXctq6ul7wXiORatA7Jj0VXS_N4RYVyBu_bBt3tsVN5zaJ2XwzqbWHAEAh-dIPjpacUoj5FdcBGgMUQpggtjEzGWZnfYmzA_-CRi7r20JnJ_T3IauNpyyaxNfjluQqC67xgztGkNWVEuO1nQjlsPgmcCUf5UQ-ClIye_S3sBNwRz6UiTxamvJyqD505gdBRJh6j_mDmVUVj1jRFnzEKXfjltH5TnCFW04-wud6AEghC0Uksj3TPJ1-TCzUV5Pu5LayJsDrla5MtqdwQS65QMsaYHnDurUB0CjIZhn7qHvfy662851_DTUjXOk7M&key=AIzaSyD8VLDzrGwi5HhtRmrNxnSDqXoU2fqt2PY');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.45);
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(28,40,38,0.2) 0%, rgba(28,40,38,0.5) 60%, rgba(28,40,38,0.85) 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    max-width: 800px;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold-light);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 9vw, 7rem);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.0;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-style: italic;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 2.5rem;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--dark);
+    padding: 0.9rem 2.2rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--gold-light); }
+
+  .btn-outline {
+    border: 1px solid rgba(255,255,255,0.6);
+    color: var(--white);
+    padding: 0.9rem 2.2rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: border-color 0.3s, background 0.3s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--gold-light);
+    background: rgba(200,169,110,0.15);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .hero-scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+  }
+
+  /* ── STRIP ── */
+  .strip {
+    background: var(--teal);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .strip-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: rgba(255,255,255,0.9);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .strip-icon {
+    font-size: 1.1rem;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    padding: 6rem 2rem;
+    background: var(--cream);
+  }
+
+  .about-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-images {
+    position: relative;
+    height: 520px;
+  }
+
+  .about-img-main {
+    position: absolute;
+    top: 0; left: 0;
+    width: 75%;
+    height: 75%;
+    object-fit: cover;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  }
+
+  .about-img-accent {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 55%;
+    height: 55%;
+    object-fit: cover;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    border: 6px solid var(--cream);
+  }
+
+  .about-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--teal);
+    color: white;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+    border: 3px solid var(--gold);
+    z-index: 2;
+    line-height: 1.4;
+  }
+
+  .about-badge strong {
+    font-size: 1.4rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  .section-eyebrow {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .section-eyebrow::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    color: var(--dark);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .about-text p {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: var(--text-light);
+    margin-bottom: 1.2rem;
+  }
+
+  .about-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .about-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .feature-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--teal);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .feature-text strong {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 0.2rem;
+  }
+
+  .feature-text span {
+    font-size: 0.75rem;
+    color: var(--text-light);
+  }
+
+  /* ── MENU ── */
+  .menu {
+    padding: 6rem 2rem;
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .menu::before {
+    content: 'MENU';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.02);
+    letter-spacing: 0.2em;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .menu-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .menu-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .menu-header .section-eyebrow {
+    justify-content: center;
+  }
+
+  .menu-header .section-eyebrow::after { display: none; }
+  .menu-header .section-eyebrow::before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .menu-header .section-title {
+    color: var(--white);
+  }
+
+  .menu-header p {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.85rem;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  .menu-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .menu-tab {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    transition: 0.3s;
+    font-family: 'Montserrat', sans-serif;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .menu-tab:last-child { border-right: none; }
+
+  .menu-tab.active,
+  .menu-tab:hover {
+    background: var(--gold);
+    color: var(--dark);
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5px;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .menu-item {
+    background: rgba(255,255,255,0.03);
+    padding: 2rem;
+    transition: background 0.3s;
+    border-left: 3px solid transparent;
+  }
+
+  .menu-item:hover {
+    background: rgba(255,255,255,0.07);
+    border-left-color: var(--gold);
+  }
+
+  .menu-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+    gap: 1rem;
+  }
+
+  .menu-item-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.3;
+  }
+
+  .menu-item-price {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--gold);
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+  }
+
+  .menu-item-desc {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.7;
+  }
+
+  .menu-item-tag {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    background: rgba(42,107,108,0.3);
+    color: var(--teal-light);
+    border: 1px solid rgba(42,107,108,0.4);
+  }
+
+  .menu-item-tag.tag-western {
+    background: rgba(200,169,110,0.15);
+    color: var(--gold-light);
+    border-color: rgba(200,169,110,0.3);
+  }
+
+  .menu-note {
+    text-align: center;
+    margin-top: 3rem;
+    color: rgba(255,255,255,0.3);
+    font-size: 0.75rem;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+  }
+
+  /* ── GALLERY ── */
+  .gallery {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 6px;
+    background: var(--dark);
+    padding: 0 0 6px 0;
+  }
+
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gallery-item:first-child {
+    grid-row: span 1;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+
+  .gallery-item-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(28,40,38,0.7) 0%, transparent 50%);
+    display: flex;
+    align-items: flex-end;
+    padding: 1.5rem;
+  }
+
+  .gallery-item-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── REVIEWS ── */
+  .reviews {
+    padding: 6rem 2rem;
+    background: var(--sand);
+  }
+
+  .reviews-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .reviews-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .reviews-header .section-eyebrow {
+    justify-content: center;
+  }
+
+  .reviews-header .section-eyebrow::after { display: none; }
+  .reviews-header .section-eyebrow::before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .rating-summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .rating-big {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 600;
+    color: var(--dark);
+    line-height: 1;
+  }
+
+  .rating-details {
+    text-align: left;
+  }
+
+  .stars {
+    color: var(--gold);
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+  }
+
+  .rating-count {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    letter-spacing: 0.05em;
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .review-card {
+    background: var(--white);
+    padding: 2rem;
+    position: relative;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+
+  .review-card:hover {
+    box-shadow: 0 10px 50px rgba(0,0,0,0.12);
+    transform: translateY(-3px);
+  }
+
+  .review-card::before {
+    content: '"';
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    color: var(--sand);
+    line-height: 1;
+    font-style: italic;
+  }
+
+  .review-stars {
+    color: var(--gold);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .review-text {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+  }
+
+  .review-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .review-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .review-name {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--dark);
+    letter-spacing: 0.05em;
+  }
+
+  .review-platform {
+    font-size: 0.68rem;
+    color: var(--text-light);
+    margin-top: 0.15rem;
+  }
+
+  /* ── VISIT ── */
+  .visit {
+    padding: 6rem 2rem;
+    background: var(--cream);
+  }
+
+  .visit-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .visit-info h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .visit-info h2 em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .visit-info > p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+
+  .info-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .info-block {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .info-block-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    border-radius: 2px;
+  }
+
+  .info-block-text strong {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dark);
+    margin-bottom: 0.25rem;
+  }
+
+  .info-block-text span {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  .info-block-text a {
+    color: var(--teal);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+  }
+
+  .info-block-text a:hover { color: var(--teal-light); }
+
+  .hours-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.3rem;
+    background: var(--white);
+    padding: 1.5rem;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+  }
+
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--sand);
+    grid-column: span 2;
+  }
+
+  .hours-row:last-child { border-bottom: none; }
+
+  .hours-row:nth-child(7) { border-bottom: none; }
+
+  .hours-day {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--dark);
+    letter-spacing: 0.05em;
+  }
+
+  .hours-time {
+    font-size: 0.78rem;
+    color: var(--text-light);
+  }
+
+  .hours-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(42,107,108,0.1);
+    color: var(--teal);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .hours-badge::before {
+    content: '●';
+    font-size: 0.5rem;
+    color: #4CAF50;
+  }
+
+  .visit-map {
+    position: sticky;
+    top: 80px;
+  }
+
+  .map-wrapper {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  }
+
+  .map-wrapper iframe {
+    display: block;
+    width: 100%;
+    height: 420px;
+    border: none;
+    filter: saturate(0.9);
+  }
+
+  .map-label {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: var(--teal);
+    color: white;
+    padding: 0.5rem 1rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .map-cta {
+    display: block;
+    background: var(--dark);
+    color: var(--white);
+    text-align: center;
+    padding: 1rem;
+    text-decoration: none;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: background 0.3s;
+  }
+
+  .map-cta:hover { background: var(--teal); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    padding: 4rem 2rem 2.5rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 2rem;
+  }
+
+  .footer-brand .nav-logo {
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+  .footer-brand p {
+    font-size: 0.82rem;
+    line-height: 1.8;
+    max-width: 280px;
+  }
+
+  .footer-col h4 {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 1.2rem;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .footer-col ul li a {
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    font-size: 0.82rem;
+    transition: color 0.3s;
+  }
+
+  .footer-col ul li a:hover { color: var(--gold-light); }
+
+  .footer-col ul li {
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .footer-bottom a {
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .about-inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .about-images {
+      height: 380px;
+    }
+
+    .visit-inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .visit-map {
+      position: static;
+    }
+
+    .footer-top {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-brand {
+      grid-column: span 2;
+    }
+
+    .gallery {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0; right: 0;
+      background: rgba(28,40,38,0.98);
+      flex-direction: column;
+      padding: 1.5rem 2rem;
+      gap: 1.2rem;
+    }
+
+    .nav-links.open { display: flex; }
+
+    .nav-hamburger { display: flex; }
+
+    .strip {
+      gap: 1rem;
+    }
+
+    .about-features {
+      grid-template-columns: 1fr;
+    }
+
+    .menu-tabs {
+      flex-wrap: wrap;
+    }
+
+    .footer-top {
+      grid-template-columns: 1fr;
+    }
+
+    .footer-brand {
+      grid-column: span 1;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-btns {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .btn-primary, .btn-outline {
+      width: 100%;
+      text-align: center;
+      max-width: 280px;
+    }
+
+    .about-images {
+      height: 300px;
+    }
+
+    .gallery-item img {
+      height: 220px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">Escape <span>Restaurant</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#visit" class="nav-cta">Find Us</a></li>
+  </ul>
+  <button class="nav-hamburger" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Koh Samui, Thailand</div>
+    <h1 class="hero-title">Escape<br><em>Restaurant</em></h1>
+    <p class="hero-subtitle">Where the jungle meets the sea — Mae Nam's hidden gem</p>
+    <div class="hero-divider"></div>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-primary">Explore Menu</a>
+      <a href="#visit" class="btn-outline">Get Directions</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item">
+    <span class="strip-icon">⭐</span>
+    4.3 Stars · 185 Reviews
+  </div>
+  <div class="strip-item">
+    <span class="strip-icon">🕗</span>
+    Open Daily 7AM – 11PM
+  </div>
+  <div class="strip-item">
+    <span class="strip-icon">🌊</span>
+    Ocean View Dining
+  </div>
+  <div class="strip-item">
+    <span class="strip-icon">🍳</span>
+    Thai & Western Cuisine
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-images">
+      <img class="about-img-main" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photo_reference=Ab43m-vPSo_yYwEsFb_9iXhcqf0yC9A79AnYY57DQ7kt92KJd3Hzfd4vEjCgnG97-2fn8ilV90ZHizwF1au1knteDTqGbURLXdmD7CE8IRlFstxAdG91Hv_yOoPRG4RDavlp8d3WE-4tcSxHk_hSc8hwZb2WU9JhUwMKRvQntVGyUsDISoRszB85hHnfrHOWOrSJ_gSg1SOjJ_J6okGDklsCPqbkWaQHN9qwigutwJ74vZxv6BF7y2NEVGBEtqnu5Q65LeZ6RNE4Oku3Gg6kbLwfWUzqTUi3kPtE066_rlvJLig2ILsDaurej8hemPkmPCZkp4GHREfpBwYVKgo_Ipxw1wuAs9o4rZChaup9FvXj4s2bt-ho-wgtXzOW7zdPw7OZy1lrfRLw1pYTbTAO4c618l3qnespqcp1awVIcsjk81Xqz5q_YlxYI4g4QW25EkSR&key=AIzaSyD8VLDzrGwi5HhtRmrNxnSDqXoU2fqt2PY" alt="Escape Restaurant dining area">
+      <img class="about-img-accent" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photo_reference=Ab43m-uTTCKAjryP0hJGK-VXQ14sNh-mYWkU75zM4v0kpOroKnE0zO-4cMZTItIbN38qdwAKJRWCnDgpUtL6rWMtcAOK1vJaPdmeQDxFhNi10UlcS9U5FiWXKht5jWy4NbQ6NtMnKEaTEBScoQVacG58GeOisNCLMD1jW-knMIVTD7FyShrMHeSPtqDn8307eOJ8WjbsF7Nc6ZcoS6FWyGZBERqrMBZ6RkYh0WKnTN9bkgYakx4C1h1SI1-g66zPyuBaZD0Wpa3bhaHUKCKo1-Yw-eFvEE-isUq_MTkA9YUOLDUuOCQjjbL6UO9tm-0t-j-nLljbo_dt0TcfH9PeyuTqDwYNqaflbftWZhzZRHnjabp2VVhSzns4dT1b0sJwGW-QHAoklPZ-LHSz043VNcrVWHNMmK0zzQEGmMeG2CnuJY_NEioVi57Dn7g-TsOsCcqu&key=AIzaSyD8VLDzrGwi5HhtRmrNxnSDqXoU2fqt2PY" alt="Escape Restaurant food and view">
+      <div class="about-badge">
+        <strong>4.3</strong>
+        ★ Stars<br>Google
+      </div>
+    </div>
+    <div class="about-text">
+      <div class="section-eyebrow">Our Story</div>
+      <h2 class="section-title">A True <em>Escape</em><br>on Koh Samui</h2>
+      <p>Nestled within the lush grounds of the Escape Boutique Hotel in Mae Nam, our restaurant is a sanctuary where breathtaking ocean views meet extraordinary food — from sunrise breakfasts to candlelit evenings.</p>
+      <p>Whether you're craving perfectly crafted Eggs Benedict, fragrant Thai curries, or a chilled cocktail as the sun dips below the Gulf of Thailand, Escape Restaurant promises a dining experience as memorable as the island itself.</p>
+      <p>Not easy to find — down a winding driveway over a mountain peak — but that's exactly the point. Great things are worth seeking out.</p>
+      <div class="about-features">
+        <div class="about-feature">
+          <div class="feature-icon">🌅</div>
+          <div class="feature-text">
+            <strong>Ocean View</strong>
+            <span>Panoramic Gulf of Thailand vistas</span>
+          </div>
+        </div>
+        <div class="about-feature">
+          <div class="feature-icon">🍜</div>
+          <div class="feature-text">
+            <strong>Thai & Western</strong>
+            <span>Something for every palate</span>
+          </div>
+        </div>
+        <div class="about-feature">
+          <div class="feature-icon">☕</div>
+          <div class="feature-text">
+            <strong>All-Day Café</strong>
+            <span>Breakfast through dinner & cocktails</span>
+          </div>
+        </div>
+        <div class="about-feature">
+          <div class="feature-icon">🏖️</div>
+          <div class="feature-text">
+            <strong>Beach Access</strong>
+            <span>Deep water & golden sand nearby</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="menu-inner">
+    <div class="menu-header">
+      <div class="section-eyebrow">Culinary Highlights</div>
+      <h2 class="section-title" style="color:var(--white)">What We <em style="color:var(--gold-light)">Serve</em></h2>
+      <p>From early morning favourites to late-evening cocktails — a selection inspired by island life and international flavours.</p>
+    </div>
+
+    <div class="menu-tabs">
+      <button class="menu-tab active">Breakfast</button>
+      <button class="menu-tab">Thai Classics</button>
+      <button class="menu-tab">Western</button>
+      <button class="menu-tab">Drinks</button>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Eggs Benedict</div>
+          <div class="menu-item-price">฿ 220</div>
+        </div>
+        <p class="menu-item-desc">Perfectly poached eggs on toasted English muffin, silky hollandaise, your choice of ham or smoked salmon.</p>
+        <span class="menu-item-tag tag-western">Chef's Pick</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Avocado Toast</div>
+          <div class="menu-item-price">฿ 195</div>
+        </div>
+        <p class="menu-item-desc">Open toast with house-made avocado paste, roasted chickpeas, chilli flakes and a squeeze of lime.</p>
+        <span class="menu-item-tag tag-western">Vegetarian</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Pumpkin Soup</div>
+          <div class="menu-item-price">฿ 175</div>
+        </div>
+        <p class="menu-item-desc">Velvety roasted pumpkin blended with coconut milk and lemongrass, served with crusty bread.</p>
+        <span class="menu-item-tag">House Made</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Full Thai Breakfast</div>
+          <div class="menu-item-price">฿ 180</div>
+        </div>
+        <p class="menu-item-desc">Jasmine rice congee, soft-boiled egg, pickled vegetables and crispy fried shallots.</p>
+        <span class="menu-item-tag">Local Favourite</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Pad Thai</div>
+          <div class="menu-item-price">฿ 165</div>
+        </div>
+        <p class="menu-item-desc">Stir-fried rice noodles with egg, bean sprouts, tofu or prawns, tamarind glaze and crushed peanuts.</p>
+        <span class="menu-item-tag">Thai Classic</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <div class="menu-item-name">Green Curry</div>
+          <div class="menu-item-price">฿ 185</div>
+        </div>
+        <p class="menu-item-desc">Aromatic house-ground green curry paste, coconut cream, fresh vegetables and steamed jasmine rice.</p>
+        <span class="menu-item-tag">Spicy Option</span>
+      </div>
+    </div>
+
+    <p class="menu-note">* Prices approximate — full menu available in-restaurant. Value for money rated 10/10 by our guests.</p>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<div class="gallery">
+  <div class="gallery-item">
+    <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photo_reference=Ab43m-sfGwokM3s3PBK1Nc60cOL0Euc5bGvCqnVOuZGTj1oLFnqtNCTXNCY5m08Rv509DEXDHTpmljRKRlkVc32csukpX6nTBmDjbBPu_NpQ9tFzsaIMAXctq6ul7wXiORatA7Jj0VXS_N4RYVyBu_bBt3tsVN5zaJ2XwzqbWHAEAh-dIPjpacUoj5FdcBGgMUQpggtjEzGWZnfYmzA_-CRi7r20JnJ_T3IauNpyyaxNfjluQqC67xgztGkNWVEuO1nQjlsPgmcCUf5UQ-ClIye_S3sBNwRz6UiTxamvJyqD505gdBRJh6j_mDmVUVj1jRFnzEKXfjltH5TnCFW04-wud6AEghC0Uksj3TPJ1-TCzUV5Pu5LayJsDrla5MtqdwQS65QMsaYHnDurUB0CjIZhn7qHvfy662851_DTUjXOk7M&key=AIzaSyD8VLDzrGwi5HhtRmrNxnSDqXoU2fqt2PY" alt="Restaurant ambience">
+    <div class="gallery-item-overlay"><span class="gallery-item-label">Dining Atmosphere</span></div>
+  </div>
+  <div class="gallery-item">
+    <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photo_reference=Ab43m-vPSo_yYwEsFb_9iXhcqf0yC9A79AnYY57DQ7kt92KJd3Hzfd4vEjCgnG97-2fn8ilV90ZHizwF1au1knteDTqGbURLXdmD7CE8IRlFstxAdG91Hv_yOoPRG4RDavlp8d3WE-4tcSxHk_hSc8hwZb2WU9JhUwMKRvQntVGyUsDISoRszB85hHnfrHOWOrSJ_gSg1SOjJ_J6okGDklsCPqbkWaQHN9qwigutwJ74vZxv6BF7y2NEVGBEtqnu5Q65LeZ6RNE4Oku3Gg6kbLwfWUzqTUi3kPtE066_rlvJLig2ILsDaurej8hemPkmPCZkp4GHREfpBwYVKgo_Ipxw1wuAs9o4rZChaup9FvXj4s2bt-ho-wgtXzOW7zdPw7OZy1lrfRLw1pYTbTAO4c618l3qnespqcp1awVIcsjk81Xqz5q_YlxYI4g4QW25EkSR&key=AIzaSyD8VLDzrGwi5HhtRmrNxnSDqXoU2fqt2PY" alt="Escape Restaurant view">
+    <div class="gallery-item-overlay"><span class="gallery-item-label">Ocean Views</span></div>
+  </div>
+  <div class="gallery-item">
+    <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=900&photo_reference=Ab43m-uTTCKAjryP0hJGK-VXQ14sNh-mYWkU75zM4v0kpOroKnE0zO-4cMZTItIbN38qdwAKJRWCnDgpUtL6rWMtcAOK1vJaPdmeQDxFhNi10UlcS9U5FiWXKht5jWy4NbQ6NtMnKEaTEBScoQVacG58GeOisNCLMD1jW-knMIVTD7FyShrMHeSPtqDn8307eOJ8WjbsF7Nc6ZcoS6FWyGZBERqrMBZ6RkYh0WKnTN9bkgYakx4C1h1SI1-g66zPyuBaZD0Wpa3bhaHUKCKo1-Yw-eFvEE-isUq_MTkA9YUOLDUuOCQjjbL6UO9tm-0t-j-nLljbo_dt0TcfH9PeyuTqDwYNqaflbftWZhzZRHnjabp2VVhSzns4dT1b0sJwGW-QHAoklPZ-LHSz043VNcrVWHNMmK0zzQEGmMeG2CnuJY_NEioVi57Dn7g-TsOsCcqu&key=AIzaSyD8VLDzrGwi5HhtRmrNxnSDqXoU2fqt2PY" alt="Food and drinks">
+    <div class="gallery-item-overlay"><span class="gallery-item-label">Island Cuisine</span></div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="reviews-inner">
+    <div class="reviews-header">
+      <div class="section-eyebrow">Guest Experiences</div>
+      <h2 class="section-title">What Our <em>Guests Say</em></h2>
+      <div class="rating-summary">
+        <div class="rating-big">4.3</div>
+        <div class="rating-details">
+          <div class="stars">★★★★☆</div>
+          <div class="rating-count">Based on 185 Google Reviews</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Good little spot for breakfast. It's part of The Escape Boutique Hotel. Breakfast I had was from the A La Carte menu — good Egg Benedict, open Toast with Avocado paste and Chickpeas, and Pumpkin soup. All was good taste."</p>
+        <div class="review-author">
+          <div class="review-avatar">RS</div>
+          <div>
+            <div class="review-name">Rachan Samee</div>
+            <div class="review-platform">Google Review · 5 stars</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★☆</div>
+        <p class="review-text">"It was actually a really nice place. Good selection of all kinds of food & reasonably priced. Nice ambience & very picturesque. Possibly a little much emphasis on western tastes but the portions were decent for the price."</p>
+        <div class="review-author">
+          <div class="review-avatar">MG</div>
+          <div>
+            <div class="review-name">Matthew Garrett</div>
+            <div class="review-platform">Google Review · 4 stars</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★☆</div>
+        <p class="review-text">"Cute place, nice aesthetic, good vibes, chill music, beautiful view of the ocean, deep water for swimming, grainy gold sand. Food was good. Drinks were great! Waited around 40 mins but we weren't in a rush — totally worth it."</p>
+        <div class="review-author">
+          <div class="review-avatar">SG</div>
+          <div>
+            <div class="review-name">Sarah Gigg</div>
+            <div class="review-platform">Google Review · 4 stars</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Great food. We ate here like 4 times in 4 days. Thai food — great. Western food — great. Breakfast — awesome. Value for money 10/10. This is the place you keep coming back to on Koh Samui."</p>
+        <div class="review-author">
+          <div class="review-avatar">M</div>
+          <div>
+            <div class="review-name">Michael</div>
+            <div class="review-platform">Google Review · 5 stars</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Atmosphere, top notch! AAA+++ Food menu, top class as well. Not easy to find — winding driveway over a mountain peak — but absolutely worth the adventure. A hidden gem on Koh Samui."</p>
+        <div class="review-author">
+          <div class="review-avatar">D</div>
+          <div>
+            <div class="review-name">Dmitry (uPVC Australia)</div>
+            <div class="review-platform">Google Review · 5 stars</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card" style="background: var(--teal); color: white;">
+        <div class="review-stars" style="color: var(--gold-light);">★★★★★</div>
+        <p class="review-text" style="color: rgba(255,255,255,0.9); font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; line-height: 1.8; margin-bottom: 1.5rem;">"We want every guest to feel like they've discovered their own secret paradise. Come for the food, stay for the view, return for the soul."</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background: var(--gold); color: var(--dark);">E</div>
+          <div>
+            <div class="review-name" style="color: white;">Escape Restaurant</div>
+            <div class="review-platform" style="color: rgba(255,255,255,0.6);">Mae Nam, Koh Samui</div>
+          </div>
+        </div>
+        <a href="https://maps.google.com/?cid=6445815557222201047" target="_blank" style="display: inline-block; margin-top: 1.5rem; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-light); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px;">Leave Your Review →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="visit" id="visit">
+  <div class="visit-inner">
+    <div class="visit-info">
+      <div class="section-eyebrow">Find Us</div>
+      <h2>Hours &amp; <em>Location</em></h2>
+      <p>We're open every day of the week — from peaceful morning coffees to lively evening dinners. Come find us tucked away in Mae Nam's lush hillside, with the ocean as your backdrop.</p>
+
+      <div class="info-blocks">
+        <div class="info-block">
+          <div class="info-block-icon">📍</div>
+          <div class="info-block-text">
+            <strong>Address</strong>
+            <span>Tambon Mae Nam, Amphoe Ko Samui<br>Chang Wat Surat Thani
